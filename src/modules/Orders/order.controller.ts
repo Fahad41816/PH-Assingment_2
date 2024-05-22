@@ -20,7 +20,7 @@ const CreateNewOrder = async (req: Request, res: Response) => {
 
         await ProductModel.findByIdAndUpdate(
           IsProducExist._id,
-          { $inc: { 'inventory.quantity': -OrderData.quantity } },
+          { $inc: { 'inventory.quantity': - OrderData.quantity } },
         )
 
         if (IsProducExist.inventory.quantity - OrderData.quantity === 0) {
@@ -51,7 +51,7 @@ const CreateNewOrder = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: 'error',
+      message: error,
     })
   }
 }
