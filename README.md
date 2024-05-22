@@ -26,6 +26,7 @@ Before you begin, ensure you have met the following requirements:
    npm i 
    npm run dev
 
+## running-the-application
 2. **Run the Backend code in your localhost**:
    ```sh 
    npm i 
