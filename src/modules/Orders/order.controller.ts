@@ -51,7 +51,7 @@ const CreateNewOrder = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: error,
+      message: 'error',
     })
   }
 }
@@ -71,8 +71,7 @@ const ShowAllorders = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Order not found',
-      data: null,
+      message: 'Order not found', 
     })
   }
 }
