@@ -1,6 +1,8 @@
 import { Request, Response } from 'express'
 import { ProductService } from './Product_service'
 import ProductDataValidation from './Product.Validation'
+
+
 // create new product
 const CreateProduct = async (req: Request, res: Response) => {
   try {
@@ -25,28 +27,43 @@ const CreateProduct = async (req: Request, res: Response) => {
 // show all product
 const ShowAllProductData = async (req: Request, res: Response) => {
   try {
-    const  searchTerm = req.query.searchTerm
-     
-    const Result = await ProductService.GetAllProduct(searchTerm)
-     
+    const searchTerm: any = req.query.searchTerm
+    const result = await ProductService.GetAllProduct(searchTerm)
 
-    if(searchTerm){
-        res.status(200).json({
-            success: true,
-            message: `Products matching search term '${searchTerm}' fetched successfully!`,
-            data: Result,
-        }) 
+    if (searchTerm) {
+      if (result && result.length > 0) {
+        return res.status(200).json({
+          success: true,
+          message: `Products matching search term '${searchTerm}' fetched successfully!`,
+          data: result,
+        })
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: `No products found matching search term '${searchTerm}'`,
+          data: [],
+        })
+      }
+    } else {
+      if (result && result.length > 0) {
+        return res.status(200).json({
+          success: true,
+          message: 'Products fetched successfully!',
+          data: result,
+        })
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: 'No products found',
+          data: null,
+        })
+      }
     }
-
-    res.status(200).json({
-      success: true,
-      message: 'Products fetched successfully!',
-      data: Result,
-    })
-  } catch (error: unknown) {
-    res.status(500).json({
+  } catch (error: any) {
+    return res.status(500).json({
       success: false,
-      messsage: error,
+      message: 'Internal Server Error',
+      error: error.message || error,
     })
   }
 }
@@ -55,7 +72,7 @@ const ShowAllProductData = async (req: Request, res: Response) => {
 const ShowSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params
-    
+
     const Result = await ProductService.GetSingleProduct(productId)
 
     res.status(200).json({
@@ -76,10 +93,10 @@ const UpdateProductData = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params
     const ProductData = req.body
-    
+
     const UpdateProductValidation = ProductDataValidation.parse(ProductData)
 
-     await ProductService.updateProduct(productId, UpdateProductValidation)
+    await ProductService.updateProduct(productId, UpdateProductValidation)
 
     res.status(200).json({
       success: true,

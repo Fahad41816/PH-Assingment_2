@@ -37,10 +37,15 @@ const CreateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 // show all product
 const ShowAllProductData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { searchTerm } = req.query;
-        console.log(searchTerm);
+        const searchTerm = req.query.searchTerm;
         const Result = yield Product_service_1.ProductService.GetAllProduct(searchTerm);
-        console.log(Result);
+        if (searchTerm) {
+            res.status(200).json({
+                success: true,
+                message: `Products matching search term '${searchTerm}' fetched successfully!`,
+                data: Result,
+            });
+        }
         res.status(200).json({
             success: true,
             message: 'Products fetched successfully!',
@@ -50,7 +55,7 @@ const ShowAllProductData = (req, res) => __awaiter(void 0, void 0, void 0, funct
     catch (error) {
         res.status(500).json({
             success: false,
-            messsage: error.message,
+            messsage: error,
         });
     }
 });
@@ -58,7 +63,6 @@ const ShowAllProductData = (req, res) => __awaiter(void 0, void 0, void 0, funct
 const ShowSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { productId } = req.params;
-        console.log(productId);
         const Result = yield Product_service_1.ProductService.GetSingleProduct(productId);
         res.status(200).json({
             success: true,
@@ -69,7 +73,7 @@ const ShowSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functi
     catch (error) {
         res.status(500).json({
             success: false,
-            messsage: error.message,
+            messsage: error,
         });
     }
 });
@@ -79,10 +83,10 @@ const UpdateProductData = (req, res) => __awaiter(void 0, void 0, void 0, functi
         const { productId } = req.params;
         const ProductData = req.body;
         const UpdateProductValidation = Product_Validation_1.default.parse(ProductData);
-        const Result = yield Product_service_1.ProductService.updateProduct(productId, UpdateProductValidation);
+        yield Product_service_1.ProductService.updateProduct(productId, UpdateProductValidation);
         res.status(200).json({
             success: true,
-            message: 'Product Update Successfully',
+            message: 'Product updated successfully!',
             data: null,
         });
     }

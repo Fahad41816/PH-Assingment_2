@@ -67,17 +67,44 @@ const ShowAllorders = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const email = req.query.email;
         const result = yield order_service_1.OrderService.GetAllOrders(email);
-        res.status(200).json({
-            success: true,
-            message: 'All Orders',
-            data: result,
-        });
+        if (email) {
+            if (result && result.length > 0) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Orders fetched successfully for user email!',
+                    data: result,
+                });
+            }
+            else {
+                res.status(404).json({
+                    success: false,
+                    message: `No orders found for user email: ${email}`,
+                    data: [],
+                });
+            }
+        }
+        else {
+            if (result && result.length > 0) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Orders fetched successfully!',
+                    data: result,
+                });
+            }
+            else {
+                res.status(404).json({
+                    success: false,
+                    message: 'No orders found',
+                    data: [],
+                });
+            }
+        }
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Order not found',
-            data: null,
+            message: 'Internal Server Error',
+            error: error
         });
     }
 });

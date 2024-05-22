@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderService = void 0;
-const Products_model_1 = require("../Products/Products.model");
 const order_model_1 = require("./order.model");
 // create order 
 const CreateOrder = (OrderData) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,7 +27,7 @@ const GetAllOrders = (email) => __awaiter(void 0, void 0, void 0, function* () {
         return Result;
     }
     else {
-        const Result = yield Products_model_1.ProductModel.find();
+        const Result = yield order_model_1.OrderModel.find();
         return Result;
     }
 });
