@@ -25,7 +25,7 @@ const CreateProduct = async (req: Request, res: Response) => {
 // show all product
 const ShowAllProductData = async (req: Request, res: Response) => {
   try {
-    const { searchTerm } = req.query
+    const  searchTerm = req.query.searchTerm
      
     const Result = await ProductService.GetAllProduct(searchTerm)
      
