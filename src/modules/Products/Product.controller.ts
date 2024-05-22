@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { ProductService } from './Product_service'
-import { z } from 'zod'
 import ProductDataValidation from './Product.Validation'
 // create new product
 const CreateProduct = async (req: Request, res: Response) => {
@@ -15,7 +14,7 @@ const CreateProduct = async (req: Request, res: Response) => {
       message: 'Product created successfully!',
       data: Result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(500).json({
       success: false,
       messsage: error,
@@ -27,10 +26,9 @@ const CreateProduct = async (req: Request, res: Response) => {
 const ShowAllProductData = async (req: Request, res: Response) => {
   try {
     const { searchTerm } = req.query
-    console.log(searchTerm)
-
+     
     const Result = await ProductService.GetAllProduct(searchTerm)
-    console.log(Result)
+     
 
     if(searchTerm){
         res.status(200).json({
@@ -45,10 +43,10 @@ const ShowAllProductData = async (req: Request, res: Response) => {
       message: 'Products fetched successfully!',
       data: Result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(500).json({
       success: false,
-      messsage: error.message,
+      messsage: error,
     })
   }
 }
@@ -57,7 +55,7 @@ const ShowAllProductData = async (req: Request, res: Response) => {
 const ShowSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params
-    console.log(productId)
+    
     const Result = await ProductService.GetSingleProduct(productId)
 
     res.status(200).json({
@@ -65,10 +63,10 @@ const ShowSingleProduct = async (req: Request, res: Response) => {
       message: 'Product fetched successfully!',
       data: Result,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(500).json({
       success: false,
-      messsage: error.message,
+      messsage: error,
     })
   }
 }
@@ -81,14 +79,14 @@ const UpdateProductData = async (req: Request, res: Response) => {
     
     const UpdateProductValidation = ProductDataValidation.parse(ProductData)
 
-    const Result = await ProductService.updateProduct(productId, UpdateProductValidation)
+     await ProductService.updateProduct(productId, UpdateProductValidation)
 
     res.status(200).json({
       success: true,
       message: 'Product updated successfully!',
       data: null,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(500).json({
       success: false,
       messsage: error,

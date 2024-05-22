@@ -8,7 +8,7 @@ const CreateProductInDb = async (ProductData: TProduct) => {
 }
 
 // get all product
-const GetAllProduct = async (searchTerm: any) => {
+const GetAllProduct = async (searchTerm: string) => {
    
   if(searchTerm){  // Case-insensitive regex
     const regexValue = new RegExp(searchTerm, 'i')

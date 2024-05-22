@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { ProductModel } from '../Products/Products.model'
-import { OrderModel } from './order.model'
 import { OrderService } from './order_service'
 import orderDataValidation from './Order.Validation'
 
@@ -48,7 +47,7 @@ const CreateNewOrder = async (req: Request, res: Response) => {
         data: null,
       })
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     res.status(500).json({
       success: false,
       message: error,
@@ -93,11 +92,11 @@ const ShowAllorders = async (req: Request, res: Response) => {
           });
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       res.status(500).json({
         success: false,
         message: 'Internal Server Error',
-        error: error.message,
+        error: error
       });
     }
   };

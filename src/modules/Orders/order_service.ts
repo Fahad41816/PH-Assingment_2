@@ -1,4 +1,3 @@
-import { ProductModel } from "../Products/Products.model"
 import { Torder } from "./order.interface"
 import { OrderModel } from "./order.model"
 

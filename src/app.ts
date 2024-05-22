@@ -1,4 +1,4 @@
-import express, { json, NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 const app = express()
 import cors from 'cors'
 import { ProductRouter } from './modules/Products/Product.route';
