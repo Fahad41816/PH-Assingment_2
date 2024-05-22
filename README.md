@@ -1,6 +1,6 @@
 # My Backend Application
 
-![Node.js CI](https://github.com/yourusername/your-repo-name/workflows/Node.js%20CI/badge.svg)
+ 
 
 Welcome to the My Backend Application repository! This project provides a robust backend solution with Express and MongoDB. Follow the instructions below to set up and run the application on your local machine.
 
@@ -9,9 +9,7 @@ Welcome to the My Backend Application repository! This project provides a robust
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Running the Application](#running-the-application)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+ 
 
 ## Prerequisites
 
@@ -23,5 +21,7 @@ Before you begin, ensure you have met the following requirements:
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/Fahad41816/PH-Assingment_2.git
    cd your-repo-name
+   npm i 
+   npm run dev
