@@ -25,3 +25,8 @@ Before you begin, ensure you have met the following requirements:
    cd your-repo-name
    npm i 
    npm run dev
+
+2. **Run the Backend code in your localhost**:
+   ```sh 
+   npm i 
+   npm run dev
