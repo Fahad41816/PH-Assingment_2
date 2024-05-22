@@ -31,6 +31,15 @@ const ShowAllProductData = async (req: Request, res: Response) => {
 
     const Result = await ProductService.GetAllProduct(searchTerm)
     console.log(Result)
+
+    if(searchTerm){
+        res.status(200).json({
+            success: true,
+            message: `Products matching search term '${searchTerm}' fetched successfully!`,
+            data: Result,
+        }) 
+    }
+
     res.status(200).json({
       success: true,
       message: 'Products fetched successfully!',
@@ -76,7 +85,7 @@ const UpdateProductData = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'Product Update Successfully',
+      message: 'Product updated successfully!',
       data: null,
     })
   } catch (error: any) {
