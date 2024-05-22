@@ -63,9 +63,17 @@ const ShowAllorders = async (req: Request, res: Response) => {
 
     const result = await OrderService.GetAllOrders(email)
 
+    if(email){
+        res.status(200).json({
+            success: true,
+            message: 'Orders fetched successfully for user email!',
+            data: result,
+        })
+    }
+
     res.status(200).json({
       success: true,
-      message: 'All Orders',
+      message: 'Orders fetched successfully!',
       data: result,
     })
   } catch (error) {
