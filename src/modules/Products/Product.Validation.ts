@@ -21,7 +21,7 @@ const ProductDataValidation = z.object({
     category: z.string({
         required_error: "category is required",
         invalid_type_error: "category must be a number",
-    }),
+    }), 
     inventory: inventorySchema,
     tags: z.array(z.string()).min(1, {message: 'At least one tag is required'}),
     variants: z.array(z.object({

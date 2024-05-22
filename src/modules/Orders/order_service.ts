@@ -19,7 +19,7 @@ const GetAllOrders = async(email: string) => {
         }); 
         return Result
       }else{
-        const Result = await ProductModel.find()
+        const Result = await OrderModel.find()
         return Result
       }
 }
