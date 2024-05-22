@@ -1,4 +1,4 @@
-import express, { json, Request, Response } from 'express';
+import express, { json, NextFunction, Request, Response } from 'express';
 const app = express()
 import cors from 'cors'
 import { ProductRouter } from './modules/Products/Product.route';
@@ -16,6 +16,12 @@ app.get('/', (req : Request , res: Response) => {
   res.send('Hello World!')
 })
 
-app.
+
+app.all("*", (req : Request , res: Response)=>{
+  res.status(500).json({
+    "success": false,
+    "message": "Route not found"
+   })
+})
 
 export default app
